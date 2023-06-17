@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <script src="API.js"></script>
+  </head>
+  <body>
+    <!-- main-container  -->
+    <div id="main-container" style="height: 100vh">
+      <!-- city + prying time + select-->
+      <div>
+        <!-- city -->
+        <div id="city">
+          <h1 id="country">الرياض</h1>
+          <h6 id="date">friday 25 november</h6>
+        </div>
+        <!-- // city // -->
+        <hr style="margin: 0px 50px; border-color: #5200e1" />
+        <!-- اوقات الصلاة -->
+        <div
+          class="center"
+          style="height: 300px; margin-top: 80px; justify-content: space-around"
+        >
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>الفجر</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="fajr-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>الشروق</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="sunrise-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>الظهر</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="dhuhr-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>العصر</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="asr-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>المغرب</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="maghrib-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+          <!-- card -->
+          <div class="card">
+            <div class="header">
+              <h1>العشاء</h1>
+            </div>
+            <div class="body center" style="height: 80%">
+              <h1 class="time" id="isha-time">4:30</h1>
+            </div>
+          </div>
+          <!-- // card //  -->
+        </div>
+        <!-- // اوقات الصلاة // -->
+        <!-- change city -->
+        <div class="center" style="margin-top: 120px">
+          <select name="" class="change" id="cities-select"></select>
+        </div>
+        <!-- // change city //  -->
+      </div>
+      <!-- // city + prying time + select// -->
+    </div>
+    <!-- // main-container // -->
+    <script>
+      let cities = [
+        {
+          arabicName: "الرياض",
+          name: "Ar Riyad",
+        },
+        {
+          arabicName: "مكة المكرمة",
+          name: "Makkah al Mukarramah",
+        },
+        {
+          arabicName: "جازان",
+          name: "Jazan",
+        },
+      ];
+      for (let city of cities) {
+        const content = `
+        <option>${city.arabicName}</option>
+        `;
+        document.getElementById("cities-select").innerHTML += content;
+      }
+      document
+        .getElementById("cities-select")
+        .addEventListener("change", function () {
+          document.getElementById("country").innerHTML = this.value;
+          let cityName = "";
+          for (let city of cities) {
+            if (city.arabicName == this.value) {
+              cityName = city.name;
+            }
+          }
+          getPrayersTimingOfCity(cityName);
+        });
+    </script>
+  </body>
+</html>
